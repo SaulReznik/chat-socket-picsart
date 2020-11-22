@@ -1,5 +1,5 @@
 const socket = require('socket.io');
-const { MessageModel } = require('@saulreznik/chat-mongo-models');
+const { MessageModel } = require('chat-mongo-models-picsart');
 const mongoose = require('mongoose');
 
 const { authValidation } = require('./middlewares');
