@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { authValidation } = require('./middlewares');
 const { PORT, DB_URI } = require('./config');
 
-const io = socket.listen(PORT || 3002);
+const io = socket.listen(PORT);
 
 //MongoDB connection
 mongoose.connect(DB_URI, {
