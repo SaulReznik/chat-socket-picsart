@@ -13,6 +13,8 @@ mongoose.connect(DB_URI, {
   useUnifiedTopology: true
 });
 
+io.set('origins', '*:*');
+
 //Middlewares
 io.use(authValidation);
 
