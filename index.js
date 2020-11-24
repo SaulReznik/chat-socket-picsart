@@ -1,3 +1,4 @@
+const httpServer = require('http').createServer();
 const socket = require('socket.io');
 const { MessageModel } = require('chat-mongo-models-picsart');
 const mongoose = require('mongoose');
@@ -5,7 +6,11 @@ const mongoose = require('mongoose');
 const { authValidation } = require('./middlewares');
 const { PORT, DB_URI } = require('./config');
 
-const io = socket.listen(PORT);
+const io = socket(httpServer, {
+  cors: {
+    origin: `https://chat-web-picsart.herokuapp.com`
+  }
+});
 
 //MongoDB connection
 mongoose.connect(DB_URI, {
@@ -41,4 +46,8 @@ io.on('connection', async socket => {
   } catch (err) {
     console.log(err);
   }
+});
+
+httpServer.listen(PORT, () => {
+  console.log(`sockets running on port ${PORT}`);
 });
