@@ -7,8 +7,9 @@ const { authValidation } = require('./middlewares');
 const { PORT, DB_URI } = require('./config');
 
 const io = socket(httpServer, {
-  cors: true,
-  origins: [`https://chat-web-picsart.herokuapp.com`]
+  cors: {
+    origin: '*'
+  }
 });
 
 //MongoDB connection
