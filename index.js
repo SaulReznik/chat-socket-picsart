@@ -8,7 +8,7 @@ const { PORT, DB_URI } = require('./config');
 
 const io = socket(httpServer, {
   cors: {
-    origin: `https://chat-socket-picsart.herokuapp.com`
+    origin: `https://chat-web-picsart.herokuapp.com`
   }
 });
 
