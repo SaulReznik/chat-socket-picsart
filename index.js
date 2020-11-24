@@ -1,13 +1,17 @@
-const httpServer = require('http').createServer();
+const http = require('http');
 const socket = require('socket.io');
 const cors = require('cors');
+const express = require('express');
 const { MessageModel } = require('chat-mongo-models-picsart');
 const mongoose = require('mongoose');
 
 const { authValidation } = require('./middlewares');
 const { PORT, DB_URI } = require('./config');
 
-const io = socket(httpServer, {
+const app = express();
+const server = http.createServer(app);
+
+const io = socket(server, {
   cors: {
     origin: '*'
   }
