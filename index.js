@@ -1,5 +1,6 @@
 const httpServer = require('http').createServer();
 const socket = require('socket.io');
+const cors = require('cors');
 const { MessageModel } = require('chat-mongo-models-picsart');
 const mongoose = require('mongoose');
 
@@ -21,6 +22,7 @@ mongoose.connect(DB_URI, {
 io.set('origins', '*:*');
 
 //Middlewares
+io.use(cors());
 io.use(authValidation);
 
 io.on('connection', async socket => {
