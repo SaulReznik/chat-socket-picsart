@@ -20,7 +20,7 @@ mongoose.connect(DB_URI, {
 });
 
 //Middlewares
-io.use(cors());
+app.use(cors());
 io.use(authValidation);
 
 io.on('connection', async socket => {
