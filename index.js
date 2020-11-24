@@ -11,19 +11,13 @@ const { PORT, DB_URI } = require('./config');
 const app = express();
 const server = http.createServer(app);
 
-const io = socket(server, {
-  cors: {
-    origin: '*'
-  }
-});
+const io = socket(server);
 
 //MongoDB connection
 mongoose.connect(DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
-io.set('origins', '*:*');
 
 //Middlewares
 io.use(cors());
