@@ -12,9 +12,11 @@ const app = express();
 const server = http.createServer(app);
 
 const io = socket(server, {
-  origin: true,
-  methods: ['GET', 'POST'],
-  credentials: true
+  cors: {
+    origin: 'https://chat-web-picsart.herokuapp.com',
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
 });
 
 //MongoDB connection
