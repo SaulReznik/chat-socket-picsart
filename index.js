@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 
 const io = socket(server, {
-  origin: 'https://chat-web-picsart.herokuapp.com',
+  origins: '*:*',
   methods: ['GET', 'POST']
 });
 
