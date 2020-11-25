@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 
 const io = socket(server, {
-  origins: '*:*',
+  origin: true,
   methods: ['GET', 'POST']
 });
 
