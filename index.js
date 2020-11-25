@@ -11,7 +11,10 @@ const { PORT, DB_URI } = require('./config');
 const app = express();
 const server = http.createServer(app);
 
-const io = socket(server);
+const io = socket(server, {
+  origin: 'https://chat-web-picsart.herokuapp.com',
+  methods: ['GET', 'POST']
+});
 
 //MongoDB connection
 mongoose.connect(DB_URI, {
