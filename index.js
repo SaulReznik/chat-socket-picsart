@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const io = socket(server, {
   cors: {
-    origin: 'https://chat-web-picsart.herokuapp.com',
+    origin: '*',
     methods: ['GET', 'POST'],
     credentials: true
   }
