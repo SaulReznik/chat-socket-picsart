@@ -39,6 +39,10 @@ app.use((req, res, next) => {
 });
 io.use(authValidation);
 
+app.get('/', (req, res) => {
+  res.json('Test');
+});
+
 io.on('connection', async socket => {
   try {
     const messagesDB = await MessageModel.find();
