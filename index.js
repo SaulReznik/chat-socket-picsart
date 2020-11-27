@@ -11,7 +11,9 @@ const { PORT, DB_URI } = require('./config');
 const app = express();
 const server = http.createServer(app);
 
-const io = socket(app, {
+app.use(cors());
+
+const io = socket(server, {
   cors: {
     origin: '*'
   }
@@ -24,7 +26,7 @@ mongoose.connect(DB_URI, {
 });
 
 //Middlewares
-app.use(cors());
+
 io.use(authValidation);
 
 io.on('connection', async socket => {
