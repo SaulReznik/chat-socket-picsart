@@ -18,19 +18,19 @@ mongoose.connect(DB_URI, {
 });
 
 //Middlewares
-app.use(cors());
+app.all('/', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
 io.use(authValidation);
 
 app.get('/', (req, res) => {
   res.json('Test');
 });
 
-const io = socket(server, {
-  cors: {
-    origin: '*'
-  }
-});
-io.set('origins', '*:*');
+const io = socket(server);
+io.set('transports', ['websocket']);
 
 io.on('connection', async socket => {
   try {
