@@ -11,12 +11,6 @@ const { PORT, DB_URI } = require('./config');
 const app = express();
 const server = http.createServer(app);
 
-const io = socket(server, {
-  cors: {
-    origin: '*'
-  }
-});
-
 //MongoDB connection
 mongoose.connect(DB_URI, {
   useNewUrlParser: true,
@@ -24,23 +18,19 @@ mongoose.connect(DB_URI, {
 });
 
 //Middlewares
-app.use(
-  cors({
-    headers: [
-      'Access-Control-Allow-Headers',
-      'Authorization',
-      'Origin',
-      'X-Requested-With',
-      'Content-Type',
-      'Accept'
-    ]
-  })
-);
+app.use(cors());
 io.use(authValidation);
 
 app.get('/', (req, res) => {
   res.json('Test');
 });
+
+const io = socket(server, {
+  cors: {
+    origin: '*'
+  }
+});
+io.set('origins', '*:*');
 
 io.on('connection', async socket => {
   try {
