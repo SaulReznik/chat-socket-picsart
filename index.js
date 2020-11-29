@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   res.json('Test');
 });
 
-const io = socket(server);
+const io = require('socket.io')(http, { cors: { origin: '*' } });
 io.set('transports', ['websocket']);
 
 io.on('connection', async socket => {
