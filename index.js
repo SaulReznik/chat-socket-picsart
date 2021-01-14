@@ -1,6 +1,4 @@
 const http = require('http');
-const socket = require('socket.io');
-const cors = require('cors');
 const express = require('express');
 const { MessageModel } = require('chat-mongo-models-picsart');
 const mongoose = require('mongoose');
@@ -9,13 +7,16 @@ const { authValidation } = require('./middlewares');
 const { PORT, DB_URI } = require('./config');
 
 const app = express();
-const server = http.createServer(app);
 
 //MongoDB connection
 mongoose.connect(DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+// Socket
+const io = require('socket.io')(http, { cors: { origin: '*' } });
+io.set('transports', ['websocket']);
 
 //Middlewares
 app.all('/', function(req, res, next) {
@@ -24,13 +25,6 @@ app.all('/', function(req, res, next) {
   next();
 });
 io.use(authValidation);
-
-app.get('/', (req, res) => {
-  res.json('Test');
-});
-
-const io = require('socket.io')(http, { cors: { origin: '*' } });
-io.set('transports', ['websocket']);
 
 io.on('connection', async socket => {
   try {
